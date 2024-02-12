@@ -1,0 +1,6 @@
+@LeMansAPI_HostAddress = http://localhost:5152
+
+GET {{LeMansAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
