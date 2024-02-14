@@ -1,7 +1,12 @@
-﻿namespace LeMansAPI.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace LeMansAPI.Models;
+
+[Table("PitStops")]
 public class PitStop
 {
+    [Key]
     public int Id { get; set; }
     public float LitersRefueled { get; set; }
     public int NumOfTiresChanged { get; set; }
