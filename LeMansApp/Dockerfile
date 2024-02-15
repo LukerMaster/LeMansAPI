@@ -9,19 +9,17 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["LeMansAPI/LeMansAPI.csproj", "LeMansAPI/"]
-RUN dotnet restore "./LeMansAPI/LeMansAPI.csproj"
+COPY ["LeMansApp/LeMansApp.csproj", "LeMansApp/"]
+RUN dotnet restore "./LeMansApp/LeMansApp.csproj"
 COPY . .
-WORKDIR "/src/LeMansAPI"
-RUN dotnet build "./LeMansAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/LeMansApp"
+RUN dotnet build "./LeMansApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./LeMansAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./LeMansApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-EXPOSE 443
-ENTRYPOINT ["dotnet", "LeMansAPI.dll"]
+ENTRYPOINT ["dotnet", "LeMansApp.dll"]

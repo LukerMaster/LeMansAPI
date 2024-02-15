@@ -16,4 +16,22 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=pass
-      
+  users_db:
+    image: postgres:latest
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=pass
+
+  lemansapp:
+    image: ${DOCKER_REGISTRY-}lemansapp
+    depends_on:
+      - "lemansapi"
+      - "users_db"
+    build:
+      context: .
+      dockerfile: LeMansApp/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=users_db;Port=5432;Database=UsersDb;Password=pass;User Id=postgres;
+      - ApiConfig__Url=https://lemansapi/
+

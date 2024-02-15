@@ -1,0 +1,56 @@
+﻿@page "/Drivers"
+@using LeMansAPI.Models
+@using Newtonsoft.Json
+@inject IConfiguration config;
+
+
+<h3>Drivers</h3>
+
+@if (DriverList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Last Name</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var driver in DriverList)
+        {
+            <tr>
+                <td>@driver.Id</td>
+                <td>@driver.FirstName</td>
+                <td>@driver.LastName</td>
+                
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    Driver[] DriverList;
+
+    protected async override Task OnInitializedAsync()
+    {
+        string url = config["ApiConfig:Url"];
+        HttpClient client = new HttpClient();
+        client.BaseAddress = new Uri(url);
+        HttpResponseMessage response = await client.GetAsync($"{url}/api/drivers");
+
+        // Check if the request was successful
+        if (response.IsSuccessStatusCode)
+        {
+        // Deserialize the JSON response into a list of driver objects
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            List<Driver> drivers = JsonConvert.DeserializeObject<List<Driver>>(jsonResponse);
+        }
+    }
+}
