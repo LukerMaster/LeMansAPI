@@ -11,8 +11,7 @@ namespace LeMansAPI
         public DbSet<Race> Races { get; set; }
         public DbSet<RaceEntryResult> RaceEntryResults { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Driver?> Drivers { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
         public DbSet<PitStop> PitStops { get; set; }
-        public DbSet<LeMansAPI.Models.Driver> Driver { get; set; } = default!;
     }
 }
