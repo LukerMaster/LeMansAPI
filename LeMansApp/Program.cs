@@ -1,6 +1,7 @@
 using LeMansApp.Components;
 using LeMansApp.Components.Account;
 using LeMansApp.Data;
+using LeMansApp.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+
+builder.Services.AddSingleton<ApiDownloader>();
 
 var app = builder.Build();
 

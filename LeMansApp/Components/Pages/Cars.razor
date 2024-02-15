@@ -1,0 +1,51 @@
+﻿@page "/Cars"
+@using LeMansAPI.Models
+@using LeMansApp.Services
+@inject ApiDownloader ApiDownloader;
+
+
+<PageTitle>Cars</PageTitle>
+
+@if (CarList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Production Year</th>
+            <th>Peak Power (kW)</th>
+            <th>Peak Power (BHP)</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var driver in CarList)
+        {
+            <tr>
+                <td>@driver.Id</td>
+                <td>@driver.Brand</td>
+                <td>@driver.Model</td>
+                <td>@driver.ProductionYear</td>
+                <td>@(driver.PeakPowerKw.ToString("F1"))</td>
+                <td>@((driver.PeakPowerKw / 0.745699872).ToString("F1"))</td>
+                
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<Car>? CarList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        CarList = await ApiDownloader.GetFromApi<Car>("api/Cars");
+    }
+}
