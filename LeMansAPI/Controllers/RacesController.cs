@@ -12,47 +12,47 @@ namespace LeMansAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DriversController : ControllerBase
+    public class RacesController : ControllerBase
     {
         private readonly ApiDbContext _context;
 
-        public DriversController(ApiDbContext context)
+        public RacesController(ApiDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Drivers
+        // GET: api/Races
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Driver>>> GetDrivers()
+        public async Task<ActionResult<IEnumerable<Race>>> GetRaces()
         {
-            return await _context.Drivers.ToListAsync();
+            return await _context.Races.ToListAsync();
         }
 
-        // GET: api/Drivers/5
+        // GET: api/Races/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Driver>> GetDriver(int id)
+        public async Task<ActionResult<Race>> GetRace(int id)
         {
-            var driver = await _context.Drivers.FindAsync(id);
+            var race = await _context.Races.FindAsync(id);
 
-            if (driver == null)
+            if (race == null)
             {
                 return NotFound();
             }
 
-            return driver;
+            return race;
         }
 
-        // PUT: api/Drivers/5
+        // PUT: api/Races/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDriver(int id, Driver driver)
+        public async Task<IActionResult> PutRace(int id, Race race)
         {
-            if (id != driver.Id)
+            if (id != race.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(driver).State = EntityState.Modified;
+            _context.Entry(race).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace LeMansAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DriverExists(id))
+                if (!RaceExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace LeMansAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Drivers
+        // POST: api/Races
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Driver>> PostDriver(Driver driver)
+        public async Task<ActionResult<Race>> PostRace(Race race)
         {
-            _context.Drivers.Add(driver);
+            _context.Races.Add(race);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDriver", new { id = driver.Id }, driver);
+            return CreatedAtAction("GetRace", new { id = race.Id }, race);
         }
 
-        // DELETE: api/Drivers/5
+        // DELETE: api/Races/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDriver(int id)
+        public async Task<IActionResult> DeleteRace(int id)
         {
-            var driver = await _context.Drivers.FindAsync(id);
-            if (driver == null)
+            var race = await _context.Races.FindAsync(id);
+            if (race == null)
             {
                 return NotFound();
             }
 
-            _context.Drivers.Remove(driver);
+            _context.Races.Remove(race);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DriverExists(int id)
+        private bool RaceExists(int id)
         {
-            return _context.Drivers.Any(e => e.Id == id);
+            return _context.Races.Any(e => e.Id == id);
         }
     }
 }
