@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  lemansapi:
+    image: ${DOCKER_REGISTRY-}lemansapi
+    depends_on:
+      - "lemans_db"
+    build:
+      context: .
+      dockerfile: LeMansAPI/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=lemans_db;Port=5432;Database=LeMansDb;Password=pass;User Id=postgres;
+  lemans_db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=pass
+      

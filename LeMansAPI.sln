@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeMansAPI", "LeMansAPI\LeMansAPI.csproj", "{6F3A3223-2406-4C4B-8754-AFA64CFBE333}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeMansApp", "LeMansApp\LeMansApp.csproj", "{839FB12E-809C-4045-894B-A08501B8066C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeMansApp", "LeMansApp\LeMansApp.csproj", "{839FB12E-809C-4045-894B-A08501B8066C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CBC24564-03A8-4FF3-A5CD-A3A604B8E1F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{839FB12E-809C-4045-894B-A08501B8066C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{839FB12E-809C-4045-894B-A08501B8066C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{839FB12E-809C-4045-894B-A08501B8066C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC24564-03A8-4FF3-A5CD-A3A604B8E1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC24564-03A8-4FF3-A5CD-A3A604B8E1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC24564-03A8-4FF3-A5CD-A3A604B8E1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC24564-03A8-4FF3-A5CD-A3A604B8E1F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
