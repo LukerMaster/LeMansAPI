@@ -23,5 +23,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-EXPOSE 443
 ENTRYPOINT ["dotnet", "LeMansAPI.dll"]
