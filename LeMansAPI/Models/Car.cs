@@ -12,4 +12,5 @@ public class Car
     public string Model { get; set; } = null!;
     public int ProductionYear { get; set; }
     public float PeakPowerKw { get; set; }
+    public float CurbWeightKg { get; set; }
 }

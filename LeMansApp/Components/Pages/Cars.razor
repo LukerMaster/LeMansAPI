@@ -21,18 +21,22 @@ else
             <th>Production Year</th>
             <th>Peak Power (kW)</th>
             <th>Peak Power (BHP)</th>
+            <th>Curb Weight (kg)</th>
+            <th>Power to weight ratio (kW/kg)</th>
         </tr>
         </thead>
         <tbody>
-            @foreach (var driver in CarList)
+            @foreach (var car in CarList)
         {
             <tr>
-                <td>@driver.Id</td>
-                <td>@driver.Brand</td>
-                <td>@driver.Model</td>
-                <td>@driver.ProductionYear</td>
-                <td>@(driver.PeakPowerKw.ToString("F1"))</td>
-                <td>@((driver.PeakPowerKw / 0.745699872).ToString("F1"))</td>
+                <td>@car.Id</td>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.ProductionYear</td>
+                <td>@(car.PeakPowerKw.ToString("F1"))</td>
+                <td>@((car.PeakPowerKw / 0.745699872).ToString("F1"))</td>
+                <td>@(car.CurbWeightKg.ToString("F1"))</td>
+                <td>@((car.PeakPowerKw/car.CurbWeightKg).ToString("F"))</td>
                 
             </tr>
         }
@@ -46,6 +50,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        CarList = await ApiDownloader.GetFromApi<Car>("api/Cars");
+        CarList = await ApiDownloader.GetFromApiAsListAsync<Car>("api/Cars");
     }
 }

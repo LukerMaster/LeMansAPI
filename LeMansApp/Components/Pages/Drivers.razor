@@ -40,6 +40,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        DriverList = await ApiDownloader.GetFromApi<Driver>("api/Drivers");
+        DriverList = await ApiDownloader.GetFromApiAsListAsync<Driver>("api/Drivers");
     }
 }

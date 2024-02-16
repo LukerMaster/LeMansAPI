@@ -12,7 +12,12 @@ namespace LeMansApp.Services
         {
             _config = config;
         }
-        public async Task<List<T>?> GetFromApi<T>(string path)
+        public async Task<List<T>> GetFromApiAsListAsync<T>(string path)
+        {
+            return await GetFromApiAsync<List<T>>(path);
+        }
+
+        public async Task<T> GetFromApiAsync<T>(string path)
         {
             string url = _config["ApiConfig:Url"];
 
@@ -28,9 +33,9 @@ namespace LeMansApp.Services
             {
                 // Deserialize the JSON response into a list of driver objects
                 string jsonResponse = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<T>>(jsonResponse)!;
+                return JsonConvert.DeserializeObject<T>(jsonResponse)!;
             }
-            return null;
+            return default(T);
         }
     }
 }

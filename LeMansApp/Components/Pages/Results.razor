@@ -1,0 +1,50 @@
+﻿@page "/{id}/Results"
+@using LeMansAPI.Models
+@using LeMansApp.Services
+@inject ApiDownloader ApiDownloader;
+
+
+<PageTitle>Results</PageTitle>
+
+@if (RaceList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Drivers</th>
+                <th>Car</th>
+                <th>Distance (m)</th>
+                <th>Pit Stops</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var race in RaceList)
+            {
+                <tr>
+                    <td>@race.Id</td>
+                    <td>@race.Drivers</td>
+                    <td>@race.Car</td>
+                    <td>@race.MetersDriven.ToString("F")</td>
+                    <td>@race.PitStops.Length</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<RaceEntryResult> RaceList;
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        RaceList = await ApiDownloader.GetFromApiAsListAsync<RaceEntryResult>($"api/RaceEntryResults/AllForRace/{Id}");
+    }
+}

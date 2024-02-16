@@ -42,6 +42,26 @@ namespace LeMansAPI.Controllers
             return raceEntryResult;
         }
 
+        // GET: api/RaceEntryResults/5
+        [HttpGet("AllForRace/{id}")]
+        public ActionResult<List<RaceEntryResult>> GetAllResultsForRace(int id)
+        {
+            var raceEntryResults = _context.RaceEntryResults
+                .Include(x => x.Car)
+                .Include(x => x.Drivers)
+                .Include(x => x.Race)
+                .Include(x => x.PitStops)
+                .Where(x => x.Race.Id == id)
+                .ToList();
+
+            if (raceEntryResults == null)
+            {
+                return NotFound();
+            }
+
+            return raceEntryResults;
+        }
+
         // PUT: api/RaceEntryResults/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -1,0 +1,49 @@
+﻿@page "/Races"
+@using LeMansAPI.Models
+@using LeMansApp.Services
+@inject ApiDownloader ApiDownloader;
+
+
+<PageTitle>Races</PageTitle>
+
+@if (RaceList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Notes</th>
+            <th>Notes</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var race in RaceList)
+        {
+            <a href="/Races/@race.Id/Results">
+                <tr>
+                    <td>@race.Id</td>
+                    <td>@race.StartTime</td>
+                    <td>@race.EndTime</td>
+                    <td>@race.Note</td>
+                </tr>
+            </a>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<Race>? RaceList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        RaceList = await ApiDownloader.GetFromApiAsListAsync<Race>("api/Races");
+    }
+}
