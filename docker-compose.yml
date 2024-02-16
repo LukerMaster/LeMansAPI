@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile: LeMansAPI/Dockerfile
     environment:
-      - ConnectionStrings__DefaultConnection=Server=lemans_db;Port=5432;Database=LeMansDb;Password=pass;User Id=postgres;
+      - ConnectionStrings__DefaultConnection=Server=lemans_db;Port=5432;Database=LeMansDb;Password=pass;User Id=postgres;Include Error Detail=true;
   users_db:
     image: postgres:latest
     networks:
@@ -44,7 +44,7 @@ services:
       context: .
       dockerfile: LeMansApp/Dockerfile
     environment:
-      - ConnectionStrings__DefaultConnection=Server=users_db;Port=5432;Database=UsersDb;Password=pass;User Id=postgres;
+      - ConnectionStrings__DefaultConnection=Server=users_db;Port=5432;Database=UsersDb;Password=pass;User Id=postgres;Include Error Detail=true;
       - ApiConfig__Url=http://lemansapi:8080/
 networks:
   usersdb:

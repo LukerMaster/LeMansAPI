@@ -1,4 +1,4 @@
-﻿@page "/{id}/Results"
+﻿@page "/Races/{id}/Results"
 @using LeMansAPI.Models
 @using LeMansApp.Services
 @inject ApiDownloader ApiDownloader;
@@ -41,7 +41,7 @@ else
 @code {
     List<RaceEntryResult> RaceList;
     [Parameter]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
