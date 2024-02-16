@@ -19,20 +19,19 @@ else
             <th>Start Time</th>
             <th>End Time</th>
             <th>Notes</th>
-            <th>Notes</th>
+            <th>Details</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var race in RaceList)
         {
-            <a href="/Races/@race.Id/Results">
-                <tr>
-                    <td>@race.Id</td>
-                    <td>@race.StartTime</td>
-                    <td>@race.EndTime</td>
-                    <td>@race.Note</td>
-                </tr>
-            </a>
+            <tr>
+                <td>@race.Id</td>
+                <td>@race.StartTime</td>
+                <td>@race.EndTime</td>
+                <td>@race.Note</td>
+                <td><a href="/Races/@race.Id/Results">Details</a></td>
+            </tr>
         }
         </tbody>
     </table>

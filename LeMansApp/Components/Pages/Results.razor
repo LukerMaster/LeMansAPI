@@ -18,7 +18,7 @@ else
                 <th>Id</th>
                 <th>Drivers</th>
                 <th>Car</th>
-                <th>Distance (m)</th>
+                <th>Distance (km)</th>
                 <th>Pit Stops</th>
             </tr>
         </thead>
@@ -27,10 +27,10 @@ else
             {
                 <tr>
                     <td>@race.Id</td>
-                    <td>@race.Drivers</td>
-                    <td>@race.Car</td>
-                    <td>@race.MetersDriven.ToString("F")</td>
-                    <td>@race.PitStops.Length</td>
+                    <td>@(string.Join("; ", race.Drivers.Select(x => x.FirstName + " " + x.LastName)))</td>
+                    <td>@($"{race.Car.Brand} {race.Car.Model} - {race.Car.ProductionYear} ({race.Car.PeakPowerKw}kW)")</td>
+                    <td>@((race.MetersDriven / 1000.0f).ToString("F"))</td>
+                    <td>@race.PitStops.Count</td>
                 </tr>
             }
         </tbody>
@@ -46,5 +46,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         RaceList = await ApiDownloader.GetFromApiAsListAsync<RaceEntryResult>($"api/RaceEntryResults/AllForRace/{Id}");
+        RaceList = RaceList.OrderBy(x => x.MetersDriven).Reverse().ToList();
     }
 }
